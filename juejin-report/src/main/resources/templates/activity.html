@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <!-- Favicon icon -->
+    <link href="images/favicon.png" rel="icon" sizes="16x16" type="image/png">
+    <title>MoYu DATA</title>
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="header-fix fix-sidebar">
+<!-- Main wrapper  -->
+<div id="main-wrapper">
+    <!-- header header  -->
+    <div class="header">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+            <!-- Logo -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">
+                    <!-- Logo icon -->
+                    <b><img alt="homepage" class="dark-logo" src="images/logo.jpeg"/></b>
+                    <!--End Logo icon -->
+                    <!-- Logo text -->
+                    <span>MoYu DATA</span>
+                </a>
+            </div>
+            <!-- End Logo -->
+            <div class="navbar-collapse">
+                <!-- toggle and nav items -->
+                <ul class="navbar-nav mr-auto mt-md-0">
+                    <!-- This is  -->
+                    <li class="nav-item"><a class="nav-link toggle-nav hidden-md-up text-muted  "
+                                            href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
+                    <li class="nav-item m-l-10"><a class="nav-link sidebartoggle hidden-sm-down text-muted  "
+                                                   href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                    <li class="nav-item" style="margin: 17px;"> 数据在每天 7点、13点、19点 刷新</li>
+                    <li class="nav-item" style="margin: 17px 17px 17px 10px;"
+                        th:text="'今日：'+${fangwen.count}+'UV | '+${fangwen.sumView}+'PV'"></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- End header header -->
+
+    <!-- Left Sidebar  -->
+    <div class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar" style="overflow: visible hidden; width: auto; height: 100%;">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebar-menu">
+                    <li class="nav-devider"></li>
+                    <li style="height: 10px;"></li>
+                    <li><a aria-expanded="false" class="collapse" href="index.html"><i class="fa fa-table"></i><span
+                            class="hide-menu">排行榜</span></a>
+                    </li>
+                    <li><a aria-expanded="false" class="collapse" href="activity.html"><i class="fa fa-table"></i><span
+                            class="hide-menu">活动榜</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </div>
+    <!-- End Left Sidebar  -->
+    <!-- Page wrapper  -->
+    <div class="page-wrapper">
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <!-- Start Page Content -->
+            <!-- /# row -->
+            <div class="row" th:each="row,stat:${report}">
+                <div class="col-12 col-xl-6" th:each="activity,stat:${row}">
+                    <div class="card">
+                        <div class="card-title">
+                            <h4 th:text="${activity.activityRule.desc}"></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="trade-history-table">
+                                <div class="table-responsive">
+                                    <table class="table table-de mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>排名</th>
+                                            <th>作者</th>
+                                            <th>文章数</th>
+                                            <th>获赞数</th>
+                                            <th>浏览数</th>
+                                            <th>评论数</th>
+                                            <th>收藏数</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="userActivity,stat:${activity.userActivityReportList}">
+                                            <td th:text="${stat.index+1}"></td>
+                                            <td><a href="#" target="_blank"
+                                                   th:href="'https://juejin.cn/user/'+${userActivity.user_id}"
+                                                   th:text="${userActivity.user_name}"></a>
+                                            </td>
+                                            <td th:text="${userActivity.count}"></td>
+                                            <td th:text="${userActivity.sum_digg_count}"></td>
+                                            <td th:text="${userActivity.sum_view_count}"></td>
+                                            <td th:text="${userActivity.sum_comment_count}"></td>
+                                            <td th:text="${userActivity.sum_collect_count}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End PAge Content -->
+        </div>
+        <!-- End Container fluid  -->
+        <!-- footer -->
+        <footer class="footer">Copyright &copy; 2021 <a href="https://juejin.cn/user/3852312492642861" target="_blank">摸鱼专家</a>
+        </footer>
+        <!-- End footer -->
+    </div>
+    <!-- End Page wrapper  -->
+</div>
+<!-- End Wrapper -->
+<!-- All Jquery -->
+<script src="js/lib/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="js/lib/bootstrap/js/popper.min.js"></script>
+<script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="js/jquery.slimscroll.js"></script>
+<!--Menu sidebar -->
+<script src="js/sidebarmenu.js"></script>
+<!--stickey kit -->
+<script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<!--Custom JavaScript -->
+<script src="js/lib/webticker/jquery.webticker.min.js"></script>
+<script src="js/lib/peitychart/jquery.peity.min.js"></script>
+<!-- scripit init-->
+<script src="js/custom.min.js"></script>
+<script src="js/dashboard-1.js"></script>
+
+<script>
+
+</script>
+
+</body>
+
+</html>
