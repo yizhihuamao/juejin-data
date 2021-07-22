@@ -40,7 +40,7 @@ public class UserExploreTask {
         log.info("拉取用户快照");
         String now = LocalDateTime.now().format(yyyyMMddHH);
         try {
-            String path = "./j-" + LocalDate.now().format(yyyyMMdd) + ".json";
+            String path = String.format(FilePathConstant.EXPLORE_DARA_PATH, LocalDate.now().format(yyyyMMdd));
             FileUtil.initFile(path);
             FileWriter fw = new FileWriter(path, true);
             PrintWriter pw = new PrintWriter(fw);
